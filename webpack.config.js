@@ -1,5 +1,6 @@
 const path = require("path");
 const { VueLoaderPlugin } = require("vue-loader");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -8,7 +9,14 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "./js/index.js",
   },
-  plugins: [new VueLoaderPlugin()],
+  plugins: [
+    new VueLoaderPlugin(),
+    new HtmlWebpackPlugin({
+      title: "Ecomerce",
+      template: "./src/index.html",
+      filename: "./index.html",
+    }),
+  ],
   module: {
     rules: [
       {
@@ -20,6 +28,15 @@ module.exports = {
         use: {
           loader: "babel-loader",
         },
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader",
+            options: { minimize: true },
+          },
+        ],
       },
     ],
   },
