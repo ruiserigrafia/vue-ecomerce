@@ -20,4 +20,10 @@ export default {
   <button @click="increment">Count is {{ count }}</button>
 </template>
 
-<style scoped></style>
+<style scoped>
+button {
+  cursor: pointer;
+  background-color: blue;
+  color: white;
+}
+</style>
