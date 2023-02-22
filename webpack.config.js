@@ -1,6 +1,7 @@
 const path = require("path");
-const { VueLoaderPlugin } = require("vue-loader");
+const { VueLoaderPlugin, default: loader } = require("vue-loader");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "development",
@@ -15,6 +16,9 @@ module.exports = {
       title: "Ecomerce",
       template: "./src/index.html",
       filename: "./index.html",
+    }),
+    new MiniCssExtractPlugin({
+      filename: "./css/index.min.css",
     }),
   ],
   module: {
@@ -37,6 +41,10 @@ module.exports = {
             options: { minimize: true },
           },
         ],
+      },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
