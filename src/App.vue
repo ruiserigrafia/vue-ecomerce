@@ -1,29 +1,32 @@
 <script>
+import HeaderComponent from "./components/HeaderComponent.vue";
+
 export default {
   data() {
     return {
-      count: 0,
+      myObject: {
+        title: "Nos passos de Jesus",
+        author: "Bispo Edir Macedo",
+        publishesat: "2015",
+      },
     };
   },
-  methods: {
-    increment() {
-      this.count++;
-    },
-  },
-  mounted() {
-    console.log("A ccontagem inicial e ${this.count}");
+  computed: {},
+  methods: {},
+  mounted() {},
+  components: {
+    HeaderComponent,
   },
 };
 </script>
 
 <template>
-  <button @click="increment">Count is {{ count }}</button>
+  <HeaderComponent :hasFigure="true" :hasHgroup="true" :hasAside="true" />
+  <ul>
+    <li v-for="(value, key, index) in myObject">
+      {{ index }}-{{ key }}:{{ value }}
+    </li>
+  </ul>
 </template>
 
-<style scoped>
-button {
-  cursor: pointer;
-  background-color: blue;
-  color: white;
-}
-</style>
+<style scoped></style>
