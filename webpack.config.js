@@ -46,6 +46,31 @@ module.exports = {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
+      {
+        test: /\.(jpe?g|png|gif|webp|svg|woff|woff2|ttf|eot)$/i,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              regExp: /\/([a-z0-9]+)\/[a-z0-9]+\.png$/i,
+              name: "img/[name].[ext]",
+            },
+          },
+        ],
+      },
     ],
   },
+};
+
+chainWebpack: (config) => {
+  config.module
+    .rule("vue")
+    .use("vue-loader")
+    .tap((options) => ({
+      ...options,
+      compilerOptions: {
+        // trata qualquer tag que comece com ion- como elementos customizados
+        isCustomElement: (tag) => tag.startsWith("ion-"),
+      },
+    }));
 };
