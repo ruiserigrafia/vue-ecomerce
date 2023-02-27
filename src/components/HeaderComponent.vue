@@ -1,53 +1,40 @@
 <script>
-import { LOGO } from "./../img/loaderImg";
+import FigureComponent from "./FigureComponent.vue";
+import HgroupComponent from "./HgroupComponent.vue";
+import ImgComponent from "./ImgComponent.vue";
 export default {
-  props: { hasFigure: Boolean, hasHgroup: Boolean, hasAside: Boolean },
+  props: { headerAttributes: Object },
   data() {
     return {
-      hasFigure: this.hasFigure,
-      hasHgroup: this.hasHgroup,
-      hasAside: this.hasAside,
-      figAtrributes: {
-        id: "component-figure",
-      },
-      imgAtrributes: {
-        src: LOGO,
-        id: "logo",
-      },
+      headerBind: this.headerAttributes.header.attrs,
+      figureProps: this.headerAttributes.figure,
+      hgroupProps: this.headerAttributes.hgroup,
+      cartProps: this.headerAttributes.shoppingcart,
     };
   },
-  beforeMount() {},
-  created() {},
-  methods: {},
+  components: {
+    FigureComponent,
+    HgroupComponent,
+    ImgComponent,
+  },
 };
 </script>
 
 <template>
-  <header class="container-grid center-centered">
-    <figure v-if="hasFigure" v-bind="figAtrributes">
-      <img v-bind="imgAtrributes" />
-    </figure>
-    <hgroup v-if="hasHgroup"></hgroup>
-    <aside v-if="hasAside">
-      <form action="#"></form>
+  <header v-bind="headerBind">
+    <FigureComponent :figureAttributes="figureProps" />
+    <HgroupComponent :hgroupAttributes="hgroupProps" />
+    <aside class="container-flex flex-column center-centered">
+      <ImgComponent :imgAttributes="cartProps" />
     </aside>
   </header>
 </template>
 
 <style scoped>
-header {
-  grid-template-columns: 20% 60% 20%;
-  width: 95%;
-  /*
-  height: 200px;
-  background-color: aqua;
-  */
-}
-#logo {
-  width: 100%;
-}
-
-#component-figure {
+#figure-header {
   width: 80%;
+}
+#shoppingcart {
+  width: 20%;
 }
 </style>
