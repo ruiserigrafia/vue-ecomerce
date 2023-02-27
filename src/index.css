@@ -11,12 +11,6 @@
   align-items: center;
 }
 
-.container-grid {
-  display: grid;
-}
-
-.center-centered {
-  justify-items: center;
-  justify-content: center;
-  align-items: center;
+body {
+  background-color: rgb(231, 229, 229);
 }
